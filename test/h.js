@@ -13,7 +13,6 @@ exports.iterate = (src, fn = console.log) => {
   });
 };
 
-
 const PageParser = require('../lib/bball-ref-page-parser');
 
 exports.test = () => {
