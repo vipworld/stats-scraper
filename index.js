@@ -20,4 +20,5 @@ const writeTo = (filename) => {
 
 fs.mkdir(OUT_PATH, (err) => {
   bballRef.run(writeTo('bball-ref.json'));
+  bballRef.runPace(writeTo('bball-ref-pace.json'));
 });
