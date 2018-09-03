@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const bballRef = require('./lib/bball-ref');
 const pbpstats = require('./lib/pbpstats');
+const nbacom = require('./lib/nbacom');
 const dateStr = new Date().toISOString().split('T')[0];
 
 //const OUT_DIR = `data_output/${dateStr}`;
@@ -23,4 +24,5 @@ fs.mkdir(OUT_PATH, (err) => {
   bballRef.run(writeTo('bball-ref.json'));
   bballRef.runPace(writeTo('bball-ref-pace.json'));
   pbpstats.run(writeTo('pbpstats.json'));
+  nbacom.run(writeTo('nbacom.json'));
 });
