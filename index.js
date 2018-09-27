@@ -21,10 +21,16 @@ const writeTo = (filename) => {
   };
 };
 
-fs.mkdir(OUT_PATH, (err) => {
-  bballRef.run(writeTo('bball-ref.json'));
-  bballRef.runPace(writeTo('bball-ref-pace.json'));
-  pbpstats.run(writeTo('pbpstats.json'));
-  nbacom.run(writeTo('nbacom.json'));
-  players.run(writeTo('players.json'));
-});
+const cmdArgs = process.argv.slice(2);
+
+if (cmdArgs.length === 0) {
+  fs.mkdir(OUT_PATH, (err) => {
+    bballRef.run(writeTo('bball-ref.json'));
+    bballRef.runPace(writeTo('bball-ref-pace.json'));
+    pbpstats.run(writeTo('pbpstats.json'));
+    nbacom.run(writeTo('nbacom.json'));
+    players.run(writeTo('players.json'));
+  });
+} else if (cmdArgs[0] === 'merge') {
+  console.log('merging');
+}

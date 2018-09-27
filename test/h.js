@@ -31,9 +31,17 @@ exports.test = () => {
   console.log(nba.parseNbaData(nbaJS));
 };
 
-const { readJson } = require('../lib/merge');
-exports.testMerge = async () => {
-  const samplePath = '/data_output/2018-09-11/pbpstats.json'
-  const ret = await readJson(samplePath);
+const DATE_STR = '2018-09-27'; // update this
+const { readJsonFile } = require('../lib/utils');
+exports.testReadJson = async () => {
+  const samplePath = `/data_output/${DATE_STR}/pbpstats.json`;
+  const ret = await readJsonFile(samplePath);
   console.log(ret);
+};
+
+const merge = require('../lib/merge');
+exports.testMerge = async () => {
+  const mergeDir = `/data_output/${DATE_STR}/`;
+  const merged = await merge.run(mergeDir);
+  // console.log(merged);
 };
