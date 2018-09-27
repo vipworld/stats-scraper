@@ -13,7 +13,7 @@ exports.iterate = (src, fn = console.log) => {
 };
 
 const PageParser = require('../lib/bball-ref-page-parser');
-const nba = require('../lib/nbacom.js');
+const nba = require('../lib/nbacom');
 
 
 exports.testBballRef = () => {
@@ -29,4 +29,11 @@ exports.test = () => {
   const nbaText = getFileText(nbacomFile);
   const nbaJS = JSON.parse(nbaText);
   console.log(nba.parseNbaData(nbaJS));
+};
+
+const { readJson } = require('../lib/merge');
+exports.testMerge = async () => {
+  const samplePath = '/data_output/2018-09-11/pbpstats.json'
+  const ret = await readJson(samplePath);
+  console.log(ret);
 };
