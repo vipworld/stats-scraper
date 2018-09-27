@@ -15,7 +15,6 @@ exports.iterate = (src, fn = console.log) => {
 const PageParser = require('../lib/bball-ref-page-parser');
 const nba = require('../lib/nbacom');
 
-
 exports.testBballRef = () => {
   const fileName = './btext.txt';
   const text = getFileText(fileName);

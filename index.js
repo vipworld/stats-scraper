@@ -4,6 +4,7 @@ const bballRef = require('./lib/bball-ref');
 const pbpstats = require('./lib/pbpstats');
 const nbacom = require('./lib/nbacom');
 const players = require('./lib/players');
+const merge = require('./lib/merge');
 const dateStr = new Date().toISOString().split('T')[0];
 
 //const OUT_DIR = `data_output/${dateStr}`;
@@ -32,5 +33,17 @@ if (cmdArgs.length === 0) {
     players.run(writeTo('players.json'));
   });
 } else if (cmdArgs[0] === 'merge') {
-  console.log('merging');
+  if (typeof cmdArgs[1] === 'undefined') {
+    console.log('input path to data_output directory');
+  } else {
+    console.log(`merging data from ${cmdArgs[1]}`);
+    merge
+      .run(cmdArgs[1])
+      .then((mergedData) => {
+        writeTo('merged_stats.json')(mergedData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
