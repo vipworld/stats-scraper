@@ -5,6 +5,7 @@ const pbpstats = require('./lib/pbpstats');
 const nbacom = require('./lib/nbacom');
 const players = require('./lib/players');
 const merge = require('./lib/merge');
+const combine = require('./lib/combine');
 const dateStr = new Date().toISOString().split('T')[0];
 
 //const OUT_DIR = `data_output/${dateStr}`;
@@ -23,8 +24,16 @@ const writeTo = (filename) => {
 };
 
 const cmdArgs = process.argv.slice(2);
+const pathRequired = () => {
+  if (typeof cmdArgs[1] === 'undefined') {
+    console.log('input path to data_output directory');
+    return false;
+  } else {
+    return true;
+  }
+};
 
-if (cmdArgs.length === 0) {
+const fetchStats = () => {
   fs.mkdir(OUT_PATH, (err) => {
     bballRef.run(writeTo('bball-ref.json'));
     bballRef.runPace(writeTo('bball-ref-pace.json'));
@@ -32,6 +41,10 @@ if (cmdArgs.length === 0) {
     nbacom.run(writeTo('nbacom.json'));
     players.run(writeTo('players.json'));
   });
+};
+
+if (cmdArgs.length === 0) {
+  fetchStats();
 } else if (cmdArgs[0] === 'merge') {
   if (typeof cmdArgs[1] === 'undefined') {
     console.log('input path to data_output directory');
@@ -46,4 +59,6 @@ if (cmdArgs.length === 0) {
         console.log(err);
       });
   }
+} else if (cmdArgs[0] === 'combine') {
+  pathRequired() && combine.run(cmdArgs[1]);
 }
