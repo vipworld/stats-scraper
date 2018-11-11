@@ -37,6 +37,7 @@ const fetchStats = () => {
   fs.mkdir(OUT_PATH, (err) => {
     bballRef.run(writeTo('bball-ref.json'));
     bballRef.runPace(writeTo('bball-ref-pace.json'));
+    bballRef.runLeague(writeTo('bball-ref-league.json'));
     pbpstats.run(writeTo('pbpstats.json'));
     nbacom.run(writeTo('nbacom.json'));
     players.run(writeTo('players.json'));
