@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "pull": "node index.js",
     "merge": "node index.js merge",
+    "combine": "node index.js combine",
+    "all": "DATA_OUT_DIR=`date +\"data_output/%Y-%m-%d\"`; node index.js && node index.js merge $DATA_OUT_DIR && node index.js combine $DATA_OUT_DIR",
     "prettier": "prettier --single-quote --arrow-parens always --write \"**/*.js\""
   },
   "author": "",

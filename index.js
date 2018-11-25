@@ -61,5 +61,5 @@ if (cmdArgs.length === 0) {
       });
   }
 } else if (cmdArgs[0] === 'combine') {
-  pathRequired() && combine.run(cmdArgs[1]);
+  pathRequired() && combine.run(cmdArgs[1], 'combined.json');
 }
