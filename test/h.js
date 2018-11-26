@@ -23,6 +23,13 @@ exports.testBballRef = () => {
   console.log(parser.getStats());
 };
 
+const { runLeague } = require('../lib/bball-ref');
+exports.testLeaguePull = () => {
+  runLeague((ret) => {
+    // console.log(ret);
+  });
+};
+
 exports.test = () => {
   const nbacomFile = './nbacom.json';
   const nbaText = getFileText(nbacomFile);
