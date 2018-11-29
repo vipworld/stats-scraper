@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
+const { readJsonFile } = require('../lib/utils');
 
 const getFileText = (relPath) => {
   return fs.readFileSync(path.resolve(__dirname, relPath)).toString();
@@ -38,7 +39,6 @@ exports.test = () => {
 };
 
 const DATE_STR = '2018-09-27'; // update this
-const { readJsonFile } = require('../lib/utils');
 exports.testReadJson = async () => {
   const samplePath = `/data_output/${DATE_STR}/pbpstats.json`;
   const ret = await readJsonFile(samplePath);
@@ -50,4 +50,12 @@ exports.testMerge = async () => {
   const mergeDir = `/data_output/${DATE_STR}/`;
   const merged = await merge.run(mergeDir);
   // console.log(merged);
+};
+
+const aggregateMerged = require('../lib/aggregate');
+// path should be merged json
+exports.testAggregate = async (path) => {
+  const mergedData = await readJsonFile(path);
+  const totals = aggregateMerged(mergedData);
+  console.log(totals);
 };
