@@ -27,7 +27,7 @@ exports.testBballRef = () => {
 const { runLeague } = require('../lib/bball-ref');
 exports.testLeaguePull = () => {
   runLeague((ret) => {
-    // console.log(ret);
+    console.log(ret);
   });
 };
 
